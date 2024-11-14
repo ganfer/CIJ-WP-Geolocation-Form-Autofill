@@ -1,3 +1,4 @@
+
 <?php
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
@@ -63,7 +64,7 @@ class GeolocationFormAutofillPlugin {
 
             <h2><?php _e('Instructions', 'geolocation-form-autofill'); ?></h2>
             <p><?php _e('This plugin automatically fills city and postal code fields in Dynamics Customer Insights - Journeys forms based on user geolocation.', 'geolocation-form-autofill'); ?></p>
-            <p><?php _e('If you want to use the script on specific pages, select "Via Shortcode" above and use this shortcode on the desired page:', 'geolocation-form-autofill'); ?></p><p><code>[geolocation_form_autofill]</code></p>
+            <p><?php _e('If you want to use the script on specific pages, select "Via Shortcode" above and use the shortcode [geolocation_form_autofill] on the desired page.', 'geolocation-form-autofill'); ?></p>
         </div>
         <?php
     }
