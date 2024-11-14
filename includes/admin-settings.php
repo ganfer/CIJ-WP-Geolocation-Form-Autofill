@@ -1,14 +1,17 @@
 <?php
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class GeolocationFormAutofillPlugin {
     public function __construct() {
         add_action('admin_menu', array($this, 'add_admin_menu'));
         add_action('admin_init', array($this, 'register_settings'));
     }
 
+    // Admin-Menue
     public function add_admin_menu() {
         add_menu_page(
-            __('Geolocation Form Autofill', 'geolocation-form-autofill'),
-            __('Geolocation Autofill', 'geolocation-form-autofill'),
+            'Geolocation Form Autofill',
+            'Geolocation Autofill',
             'manage_options',
             'geolocation-form-autofill',
             array($this, 'admin_page'),
@@ -16,50 +19,48 @@ class GeolocationFormAutofillPlugin {
         );
     }
 
+    // Settings
     public function register_settings() {
-        register_setting('geolocation_form_autofill', 'gf_autofill_enabled');
-        register_setting('geolocation_form_autofill', 'gf_autofill_embed_location');
-        register_setting('geolocation_form_autofill', 'gf_autofill_shortcode_enabled');
+        register_setting('geolocation_form_autofill_settings', 'geolocation_form_autofill_enable');
+        register_setting('geolocation_form_autofill_settings', 'geolocation_form_autofill_location');
     }
 
+    // Admin-Page
     public function admin_page() {
+        wp_enqueue_style('geolocation_form_autofill_admin_style', GEOLOCATION_FORM_AUTOFILL_URL . 'assets/css/admin-style.css');
         ?>
         <div class="wrap">
-            <h1><?php _e('Geolocation Form Autofill Settings', 'geolocation-form-autofill'); ?></h1>
+            <h1>Dynamics Customer Insights - Journeys Forms Geolocation Form Autofill Plugin</h1>
             <form method="post" action="options.php">
-                <?php
-                settings_fields('geolocation_form_autofill');
-                do_settings_sections('geolocation_form_autofill');
-                ?>
+                <?php settings_fields('geolocation_form_autofill_settings'); ?>
+                <?php do_settings_sections('geolocation_form_autofill_settings'); ?>
+                
                 <table class="form-table">
                     <tr valign="top">
-                        <th scope="row"><?php _e('Enable Plugin', 'geolocation-form-autofill'); ?></th>
-                        <td><input type="checkbox" name="gf_autofill_enabled" value="1" <?php checked(1, get_option('gf_autofill_enabled'), true); ?> /></td>
-                    </tr>
-                    <tr valign="top">
-                        <th scope="row"><?php _e('Embed Location', 'geolocation-form-autofill'); ?></th>
+                        <th scope="row">Plugin aktivieren</th>
                         <td>
-                            <select name="gf_autofill_embed_location">
-                                <option value="header" <?php selected(get_option('gf_autofill_embed_location'), 'header'); ?>><?php _e('Header', 'geolocation-form-autofill'); ?></option>
-                                <option value="shortcode" <?php selected(get_option('gf_autofill_embed_location'), 'shortcode'); ?>><?php _e('Shortcode Only', 'geolocation-form-autofill'); ?></option>
-                            </select>
+                            <input type="checkbox" name="geolocation_form_autofill_enable" value="1" <?php checked(1, get_option('geolocation_form_autofill_enable'), true); ?> />
+                            <label for="geolocation_form_autofill_enable"></label>
                         </td>
                     </tr>
                     <tr valign="top">
-                        <th scope="row"><?php _e('Enable Shortcode', 'geolocation-form-autofill'); ?></th>
-                        <td><input type="checkbox" name="gf_autofill_shortcode_enabled" value="1" <?php checked(1, get_option('gf_autofill_shortcode_enabled'), true); ?> /></td>
+                        <th scope="row">Einbindungsort des Scripts</th>
+                        <td>
+                            <select name="geolocation_form_autofill_location">
+                                <option value="header" <?php selected(get_option('geolocation_form_autofill_location'), 'header'); ?>>Im Header</option>
+                                <option value="shortcode" <?php selected(get_option('geolocation_form_autofill_location'), 'shortcode'); ?>>Mit Shortcode</option>
+                            </select>
+                        </td>
                     </tr>
-                    <?php if (get_option('gf_autofill_shortcode_enabled')): ?>
-                    <tr valign="top">
-                        <th scope="row"><?php _e('Shortcode Usage', 'geolocation-form-autofill'); ?></th>
-                        <td><code>[geolocation_form_autofill]</code></td>
-                    </tr>
-                    <?php endif; ?>
                 </table>
+
                 <?php submit_button(); ?>
             </form>
+
+            <h2>Anleitung</h2>
+            <p>Mit diesem Plugin können Sie auf Dynamics Customer Insights - Journeys Formularen automatisch Stadt- und Postleitzahlinformationen in ein Formularfeld eintragen, basierend auf der Geolocation des Benutzers.</p>
+            <p>Wenn Sie den Code gezielt auf bestimmten Seiten einsetzen möchten, wählen Sie in der obigen Option „Mit Shortcode gezielt auf Seite“ und verwenden Sie dann den Shortcode <code>[geolocation_form_autofill]</code> auf der gewünschten Seite.</p>
         </div>
         <?php
     }
 }
-?>
