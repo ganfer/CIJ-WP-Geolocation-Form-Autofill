@@ -57,4 +57,9 @@ class GeolocationFormAutofillPlugin {
                     <?php endif; ?>
                 </table>
                 <?php submit_button(); ?>
-      
+            </form>
+        </div>
+        <?php
+    }
+}
+?>
