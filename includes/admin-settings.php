@@ -1,4 +1,3 @@
-
 <?php
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
@@ -47,11 +46,15 @@ class GeolocationFormAutofillPlugin {
                     <tr valign="top">
                         <th scope="row"><?php _e('Script Location', 'geolocation-form-autofill'); ?></th>
                         <td>
+                            <?php
+                            // Den Wert nur einmal abrufen und Fallback "header" setzen
+                            $location = get_option('geolocation_form_autofill_location', 'header');
+                            ?>
                             <select name="geolocation_form_autofill_location">
-                                <option value="header" <?php selected(get_option('geolocation_form_autofill_location', 'header'), 'header'); ?>>
+                                <option value="header" <?php selected($location, 'header'); ?>>
                                     <?php _e('In Header', 'geolocation-form-autofill'); ?>
                                 </option>
-                                <option value="shortcode" <?php selected(get_option('geolocation_form_autofill_location', 'header'), 'shortcode'); ?>>
+                                <option value="shortcode" <?php selected($location, 'shortcode'); ?>>
                                     <?php _e('Via Shortcode', 'geolocation-form-autofill'); ?>
                                 </option>
                             </select>
@@ -65,7 +68,6 @@ class GeolocationFormAutofillPlugin {
             <h2><?php _e('Instructions', 'geolocation-form-autofill'); ?></h2>
             <p><?php _e('This plugin automatically fills city and postal code fields in Dynamics Customer Insights - Journeys forms based on user geolocation.', 'geolocation-form-autofill'); ?></p>
             <p><?php _e('If you want to use the script on specific pages, select "Via Shortcode" above and use this shortcode on the desired page:', 'geolocation-form-autofill'); ?></p><p><code>[geolocation_form_autofill]</code></p>
-        </div>
         </div>
         <?php
     }
