@@ -38,7 +38,7 @@ class GeolocationFormAutofillScripts {
                         fetch(geolocationApiUrl)
                             .then(response => response.json())
                             .then(data => {
-                                var city = data.address.city;
+                                var city = data.address.city || data.address.town || data.address.village || data.address.state_district || "";
                                 var zip = data.address.postcode;
                                 console.log("Stadt: " + city);
                                 console.log("PLZ: " + zip);
