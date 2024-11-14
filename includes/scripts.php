@@ -10,17 +10,17 @@ class GeolocationFormAutofillScripts {
         add_shortcode('geolocation_form_autofill', array($this, 'shortcode_geolocation_script'));
     }
 
-    // JavaScript-Code in den Header einbinden
+    // JavaScript-Code in Header 
     public function add_geolocation_script() {
         echo $this->generate_geolocation_script();
     }
 
-    // Shortcode für gezielte Einbindung des Scripts
+    // Shortcode 
     public function shortcode_geolocation_script() {
         return $this->generate_geolocation_script();
     }
 
-    // Generierung des Geolocation-Scripts
+    // Generate Geolocation-Scripts
     private function generate_geolocation_script() {
         ob_start();
         ?>
@@ -60,6 +60,6 @@ class GeolocationFormAutofillScripts {
     }
 }
 
-// Initialisierung des Scripts
+// Init Script
 new GeolocationFormAutofillScripts();
 ?>
