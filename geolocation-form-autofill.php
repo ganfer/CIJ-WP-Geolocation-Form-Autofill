@@ -1,9 +1,10 @@
 <?php
 /**
- * Plugin Name: Customer Insights - Journeys Geolocation Form Autofill
- * Description: Ein Plugin, um Dynamics Customer Insights - Journey Formulare mit Hilfer der Geolocation vorauszufüllen.
+ * Plugin Name: CI-J Geolocation Form Autofill
+ * Description: Ein Plugin, um Dynamics Customer Insights - Journeys Formulare mit Hilfer der Geolocation vorauszufüllen.
  * Version: 1.0
  * Author: Ferdinand Ganter
+ * Author URI: https://fganter.de
  */
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
@@ -28,3 +29,12 @@ function gf_autofill_settings_link($links) {
     return $links;
 }
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'gf_autofill_settings_link');
+
+// Zusätzliche Links unter der Plugin-Beschreibung anzeigen
+function gf_autofill_plugin_meta_links($links, $file) {
+    if ($file == plugin_basename(__FILE__)) {
+        $links[] = '<a href="https://github.com/ganfer/CIJ-WP-Geolocation-Form-Autofill" target="_blank">Details anzeigen</a>';
+    }
+    return $links;
+}
+add_filter('plugin_row_meta', 'gf_autofill_plugin_meta_links', 10, 2);
