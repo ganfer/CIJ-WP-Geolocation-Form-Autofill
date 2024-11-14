@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Geolocation Form Autofill
- * Description: Ein Plugin, um das Geolocation-Formular-Autofill JavaScript auf der Webseite zu veröffentlichen.
+ * Plugin Name: Customer Insights - Journeys Geolocation Form Autofill
+ * Description: Ein Plugin, um Dynamics Customer Insights - Journey Formulare mit Hilfer der Geolocation vorauszufüllen.
  * Version: 1.0
- * Author: Dein Name
+ * Author: Ferdinand Ganter
  */
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
@@ -18,3 +18,13 @@ require_once GEOLOCATION_FORM_AUTOFILL_PATH . 'includes/scripts.php';
 
 // Initialisierung der Hauptklasse
 new GeolocationFormAutofillPlugin();
+
+// Einstellungen-Link zum Plugin auf der Plugins-Seite hinzufügen
+function gf_autofill_settings_link($links) {
+    // URL zur Admin-Einstellungsseite des Plugins
+    $settings_link = '<a href="admin.php?page=geolocation-form-autofill">Einstellungen</a>';
+    // Link zur Liste der Plugin-Links hinzufügen
+    array_unshift($links, $settings_link);
+    return $links;
+}
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'gf_autofill_settings_link');
