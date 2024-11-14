@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Plugin Name: CI-J Geolocation Form Autofill
@@ -44,3 +45,12 @@ function gf_autofill_load_textdomain() {
     load_plugin_textdomain('geolocation-form-autofill', false, basename(dirname(__FILE__)) . '/languages');
 }
 add_action('plugins_loaded', 'gf_autofill_load_textdomain');
+
+// Translate plugin description dynamically
+function gf_autofill_update_plugin_description($translated_text, $text, $domain) {
+    if ($domain === 'geolocation-form-autofill' && $text === 'A plugin to prefill Dynamics Customer Insights - Journeys forms using geolocation.') {
+        return __('A plugin to prefill Dynamics Customer Insights - Journeys forms using geolocation.', 'geolocation-form-autofill');
+    }
+    return $translated_text;
+}
+add_filter('gettext', 'gf_autofill_update_plugin_description', 10, 3);
