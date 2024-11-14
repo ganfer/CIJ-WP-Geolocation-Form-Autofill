@@ -3,11 +3,15 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 class GeolocationFormAutofillScripts {
     public function __construct() {
+        // Prüfen, ob das Skript im Header geladen werden soll
         if (get_option('geolocation_form_autofill_enable') && get_option('geolocation_form_autofill_location') === 'header') {
             add_action('wp_head', array($this, 'add_geolocation_script'));
         }
 
-        add_shortcode('geolocation_form_autofill', array($this, 'shortcode_geolocation_script'));
+        // Shortcode nur registrieren, wenn die Location-Einstellung nicht 'header' ist
+        if (get_option('geolocation_form_autofill_location') !== 'header') {
+            add_shortcode('geolocation_form_autofill', array($this, 'shortcode_geolocation_script'));
+        }
     }
 
     // JavaScript-Code in Header 
