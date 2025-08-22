@@ -14,6 +14,7 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 // Define constants
 define('GEOLOCATION_FORM_AUTOFILL_PATH', plugin_dir_path(__FILE__));
 define('GEOLOCATION_FORM_AUTOFILL_URL', plugin_dir_url(__FILE__));
+define('GEOLOCATION_FORM_AUTOFILL_VERSION', '1.0.1');
 
 // Load required files
 require_once GEOLOCATION_FORM_AUTOFILL_PATH . 'includes/admin-settings.php';

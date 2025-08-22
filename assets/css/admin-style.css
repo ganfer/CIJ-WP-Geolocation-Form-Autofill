@@ -1,13 +1,5 @@
-/* Stylesheet */
-.wrap h1 {
-    font-size: 2em;
-    color: #0073aa;
-}
-
-.form-table th {
-    font-weight: bold;
-}
-
-.form-table td {
-    padding: 10px;
+/* CI-J Geolocation Form Autofill - Admin styles */
+.wrap .form-table th {
+	width: 260px;
+	vertical-align: top;
 }
